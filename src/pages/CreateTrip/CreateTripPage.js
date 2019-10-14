@@ -10,7 +10,7 @@ const CreateTripPage = () => {
 
   return (
     <Flex direction="column" margin="2rem">
-      <Heading as="h1" fontSize="2xl" marginBottom="1rem">
+      <Heading as="h1" fontSize="60px" marginBottom="3rem">
         Create a trip
       </Heading>
       <CreateTripForm

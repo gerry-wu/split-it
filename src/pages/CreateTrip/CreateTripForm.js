@@ -1,17 +1,22 @@
 import React from 'react'
-import { Button, Input } from '@chakra-ui/core'
+import { Button, Input, Text, Box } from '@chakra-ui/core'
 
 const CreateTripForm = ({ tripName, handleChange, onSubmit }) => {
   return (
     <>
-      <Input
-        placeholder="Name your trip"
-        value={tripName}
-        size="lg"
-        onChange={handleChange}
-        width="300px"
-        marginBottom="1rem"
-      />
+      <Box>
+        <Text as="label" fontSize="lg" htmlFor="tripName">
+          Name your trip
+        </Text>
+        <Input
+          id="tripName"
+          value={tripName}
+          size="md"
+          onChange={handleChange}
+          width="300px"
+          marginBottom="1rem"
+        />
+      </Box>
 
       <Button
         width="150px"
@@ -20,7 +25,7 @@ const CreateTripForm = ({ tripName, handleChange, onSubmit }) => {
         height="auto"
         onClick={onSubmit}
       >
-        Create new Trip
+        Create Trip
       </Button>
     </>
   )
