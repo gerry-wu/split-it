@@ -50,8 +50,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-      - run: # build react
-          name: npm run build
+      - run: npm run build
       - run: # make  copy of .firebaserc
           name: generate-firebaserc
           command: cp .firebaserc.example .firebaserc
