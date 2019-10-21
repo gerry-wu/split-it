@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "my-project-id"
+  },
+  "targets": {
+    "my-project-id": {
+      "hosting": {
+        "splitit-easy": [
+          "my-project-id"
+        ]
+      }
+    }
   }
 }
