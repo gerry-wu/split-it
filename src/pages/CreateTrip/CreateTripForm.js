@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button, Input, Text, Box } from '@chakra-ui/core'
+import { Input, Text, Box } from '@chakra-ui/core'
+import CTA from '../../components/CTA'
 
 const CreateTripForm = ({ tripName, handleChange, onSubmit }) => {
   return (
@@ -18,15 +19,9 @@ const CreateTripForm = ({ tripName, handleChange, onSubmit }) => {
         />
       </Box>
 
-      <Button
-        width="150px"
-        variantColor="green"
-        p="1rem"
-        height="auto"
-        onClick={onSubmit}
-      >
+      <CTA to="/trip" onClick={onSubmit}>
         Create Trip
-      </Button>
+      </CTA>
     </>
   )
 }
