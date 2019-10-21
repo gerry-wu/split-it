@@ -9,14 +9,14 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+            - v2-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+            - v2-dependencies-
       - run: npm install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v2-dependencies-{{ checksum "package.json" }}
       - run: npm run test
   deploy:
     working_directory: ~/repository
@@ -37,7 +37,7 @@ jobs:
           command: sed -i "s/my\-project\-id/$FIREBASE_PROJECT_ID/g" .firebaserc
       - run:
           name: Deploy Firebase
-          command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN" --only hosting
+          command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN" --only hosting:splitit-easy
 workflows:
   version: 2
   build-and-deploy:
