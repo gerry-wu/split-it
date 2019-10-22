@@ -1,11 +1,14 @@
 {
   "targets": {
-    "split-it-1eb88": {
+    "my-project-id": {
       "hosting": {
         "app": [
           "splitit-easy"
         ]
       }
     }
+  },
+  "projects": {
+    "default": "my-project-id"
   }
 }
