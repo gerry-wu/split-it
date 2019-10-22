@@ -1,12 +1,9 @@
 {
-  "projects": {
-    "default": "my-project-id"
-  },
   "targets": {
-    "my-project-id": {
+    "split-it-1eb88": {
       "hosting": {
-        "splitit-easy": [
-          "my-project-id"
+        "app": [
+          "splitit-easy"
         ]
       }
     }
