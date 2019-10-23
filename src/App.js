@@ -10,10 +10,10 @@ import {
 
 function App() {
   const [trip, setTrip] = useState({
+    id: '1234', //TODO: Generate this from the DB
     name: 'Placeholder Trip',
     description: 'Cool Trip description',
-    owner: 'Mitch',
-    members: ['Gerry', 'Felipe', 'Disha'],
+    members: ['Mitch', 'Gerry', 'Felipe', 'Disha'],
   })
 
   return (

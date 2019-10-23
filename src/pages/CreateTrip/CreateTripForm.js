@@ -1,27 +1,55 @@
-import React from 'react'
-import { Input, Text, Box } from '@chakra-ui/core'
-import CTA from '../../components/CTA'
+import React, { useState } from 'react'
+import { Box, Button } from '@chakra-ui/core'
+import { useHistory } from 'react-router-dom'
+import Input from '../../components/Input'
 
-const CreateTripForm = ({ tripName, handleChange, onSubmit }) => {
+const CreateTripForm = ({ setTrip }) => {
+  const [formValues, setFormValues] = useState({
+    name: '',
+    description: '',
+  })
+
+  const history = useHistory()
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    //TODO: validate form
+    //TODO: send to DB, get response
+
+    //then set state if successful
+    setTrip({
+      name: formValues.name,
+      description: formValues.description,
+      members: ['Gerry', 'Felipe', 'Disha'],
+    })
+
+    history.push('/trip')
+  }
+
   return (
     <>
-      <Box>
-        <Text as="label" fontSize="lg" htmlFor="tripName">
-          Name your trip
-        </Text>
+      <form onSubmit={handleSubmit}>
         <Input
-          id="tripName"
-          value={tripName}
-          size="md"
-          onChange={handleChange}
-          width="300px"
-          marginBottom="1rem"
+          label="Trip"
+          value={formValues.name}
+          onChange={event =>
+            setFormValues({ ...formValues, name: event.target.value })
+          }
+          inputId="tripName"
         />
-      </Box>
-
-      <CTA to="/trip" onClick={onSubmit}>
-        Create Trip
-      </CTA>
+        <Input
+          label="Description"
+          value={formValues.description}
+          onChange={event =>
+            setFormValues({
+              ...formValues,
+              description: event.target.value,
+            })
+          }
+          inputId="tripName"
+        />
+        <Button type="submit">Create Trip</Button>
+      </form>
     </>
   )
 }
