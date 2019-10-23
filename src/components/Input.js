@@ -1,20 +1,43 @@
 import React from 'react'
-import { Text, Input as FormInput } from '@chakra-ui/core'
+import { Box, Text, Input as FormInput } from '@chakra-ui/core'
 
-const Input = ({ inputId, value, onChange, label }) => (
-  <>
+const Input = ({
+  inputId,
+  value,
+  onChange,
+  label,
+  name,
+  refName,
+  error,
+}) => (
+  <Box>
     <Text as="label" fontSize="lg" htmlFor={inputId}>
       {label}
     </Text>
     <FormInput
-      id={inputId}
+      id={name}
+      name={name}
       value={value}
+      ref={refName}
       size="md"
       onChange={onChange}
       width="300px"
       marginBottom="1rem"
+      isInvalid={error ? true : false}
+      errorBorderColor="red.300"
+      mb="0"
     />
-  </>
+    <Text
+      as="span"
+      fontSize="sm"
+      mb="0.5rem"
+      color="red.600"
+      height="1.5rem"
+      display="block"
+    >
+      {error}
+    </Text>
+  </Box>
 )
 
 export default Input

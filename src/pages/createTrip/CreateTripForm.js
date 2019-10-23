@@ -2,24 +2,23 @@ import React, { useState } from 'react'
 import { Box, Button } from '@chakra-ui/core'
 import { useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
+import useForm from 'react-hook-form'
 
 const CreateTripForm = ({ setTrip }) => {
-  const [formValues, setFormValues] = useState({
-    name: '',
-    description: '',
-  })
-
   const history = useHistory()
 
-  const handleSubmit = event => {
-    event.preventDefault()
+  const { register, handleSubmit, errors } = useForm()
+
+  const onSubmit = data => {
+    console.log(data)
+    //event.preventDefault()
     //TODO: validate form
     //TODO: send to DB, get response
 
     //then set state if successful
     setTrip({
-      name: formValues.name,
-      description: formValues.description,
+      name: data.tripName,
+      description: data.description,
       members: ['Gerry', 'Felipe', 'Disha'],
     })
 
@@ -28,25 +27,19 @@ const CreateTripForm = ({ setTrip }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           label="Trip"
-          value={formValues.name}
-          onChange={event =>
-            setFormValues({ ...formValues, name: event.target.value })
-          }
-          inputId="tripName"
+          name="tripName"
+          refName={register({ required: 'Enter a trip name' })}
+          error={errors.tripName && errors.tripName.message}
         />
+
         <Input
           label="Description"
-          value={formValues.description}
-          onChange={event =>
-            setFormValues({
-              ...formValues,
-              description: event.target.value,
-            })
-          }
-          inputId="tripName"
+          name="description"
+          refName={register({ required: 'Enter a trip description' })}
+          error={errors.description && errors.description.message}
         />
         <Button type="submit">Create Trip</Button>
       </form>
