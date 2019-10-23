@@ -10,10 +10,7 @@ const CreateTripForm = ({ setTrip }) => {
   const { register, handleSubmit, errors } = useForm()
 
   const onSubmit = data => {
-    console.log(data)
-    //event.preventDefault()
-    //TODO: validate form
-    //TODO: send to DB, get response
+    //TODO: send to DB, get OK response
 
     //then set state if successful
     setTrip({
