@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Box, Button } from '@chakra-ui/core'
+import React from 'react'
+import { Button } from '@chakra-ui/core'
 import { useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
 import useForm from 'react-hook-form'
