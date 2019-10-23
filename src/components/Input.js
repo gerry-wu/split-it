@@ -26,8 +26,10 @@ const Input = ({
       isInvalid={error ? true : false}
       errorBorderColor="red.300"
       mb="0"
+      aria-describedby={`${name}-error`}
     />
     <Text
+      id={`${name}-error`}
       as="span"
       fontSize="sm"
       mb="0.5rem"
