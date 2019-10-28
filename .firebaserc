@@ -1,6 +1,6 @@
 {
   "targets": {
-    "my-project-id": {
+    "split-it-1eb88": {
       "hosting": {
         "app": [
           "splitit-easy"
@@ -9,6 +9,6 @@
     }
   },
   "projects": {
-    "default": "my-project-id"
+    "dev": "split-it-1eb88"
   }
 }

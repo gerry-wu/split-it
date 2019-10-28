@@ -6,6 +6,7 @@
     "@chakra-ui/core": "^0.3.4",
     "@emotion/core": "^10.0.21",
     "@emotion/styled": "^10.0.17",
+    "concurrently": "^5.0.0",
     "emotion-theming": "^10.0.19",
     "firebase-tools": "^7.6.1",
     "husky": "^3.0.9",
@@ -17,6 +18,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "serve": "./node_modules/.bin/firebase serve",
+    "dev": "concurrently \"npm run serve\" \"npm run start\"",
     "build": "react-scripts build",
     "test:watch": "react-scripts test",
     "test": "react-scripts test --watchAll=false",
@@ -51,5 +54,6 @@
   "devDependencies": {
     "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-prettier": "^3.1.1"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
