@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import CreateTripPage from './pages/createTrip'
 import TripPage from './pages/trip'
 import { ThemeProvider, CSSReset } from '@chakra-ui/core'
-<<<<<<< HEAD
 import {
   BrowserRouter as Router,
   Route,
@@ -16,12 +15,6 @@ function App() {
     description: 'Cool Trip description',
     members: ['Mitch', 'Gerry', 'Felipe', 'Disha'],
   })
-=======
-import db from './utils/firestore'
-
-function App() {
-  console.log(db)
->>>>>>> setup firestore and update script
 
   return (
     <ThemeProvider>
