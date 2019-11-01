@@ -1,46 +1,79 @@
-import React from 'react'
-import { Button } from '@chakra-ui/core'
+import React, { useState } from 'react'
+import { Button, Stack } from '@chakra-ui/core'
 import { useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
+import MemberInputs from '../../components/MemberInputs'
 import useForm from 'react-hook-form'
 
 const CreateTripForm = ({ setTrip }) => {
   const history = useHistory()
+  const [memberCount, setMemberCount] = useState(1)
 
-  const { register, handleSubmit, errors } = useForm()
+  const {
+    register,
+    handleSubmit,
+    errors,
+    setValue,
+    getValues,
+  } = useForm()
 
   const onSubmit = data => {
+    const { members } = getValues({ nest: true })
     //TODO: send to DB, get OK response
 
     //then set state if successful
     setTrip({
       name: data.tripName,
       description: data.description,
-      members: ['Gerry', 'Felipe', 'Disha'],
+      members: members,
     })
 
     history.push('/trip')
   }
 
-  return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          label="Trip"
-          name="tripName"
-          refName={register({ required: 'Enter a trip name' })}
-          error={errors.tripName && errors.tripName.message}
-        />
+  const removeMember = index => {
+    const { members } = getValues({ nest: true })
+    /* getValues passing nest = true will give output an object where all form elements that use
+       the nested naming convention (member[0], member[1] etc.) are combined and added to an array.
+       Then we can filter it out, and use setValue from react-hook-form to manually set the new values.
+       memberCount determines the number of inputs to display, so they should always be in sync
+    */
+    const newMembers = members.filter((value, i) => i !== index)
+    newMembers.map((member, i) => setValue(`members[${i}]`, member))
+    setMemberCount(memberCount - 1)
+  }
 
-        <Input
-          label="Description"
-          name="description"
-          refName={register({ required: 'Enter a trip description' })}
-          error={errors.description && errors.description.message}
-        />
-        <Button type="submit">Create Trip</Button>
-      </form>
-    </>
+  return (
+    <Stack
+      as="form"
+      onSubmit={handleSubmit(onSubmit)}
+      w={{ sm: '100%', lg: '20%' }}
+    >
+      <Input
+        label="Trip"
+        name="tripName"
+        refName={register({ required: 'Enter a trip name' })}
+        error={errors.tripName && errors.tripName.message}
+      />
+
+      <Input
+        label="Description"
+        name="description"
+        refName={register({ required: 'Enter a trip description' })}
+        error={errors.description && errors.description.message}
+      />
+
+      <MemberInputs
+        register={register}
+        memberCount={memberCount}
+        setMemberCount={setMemberCount}
+        removeMember={removeMember}
+        errors={errors}
+      />
+      <Button type="submit" mt="2rem">
+        Create Trip
+      </Button>
+    </Stack>
   )
 }
 

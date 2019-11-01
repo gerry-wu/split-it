@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Flex, Heading } from '@chakra-ui/core'
 import CreateTripForm from './CreateTripForm'
 
-const CreateTripPage = () => {
+const CreateTripPage = ({ setTrip }) => {
   const [tripName, setTripName] = useState('')
   const handleChange = event => setTripName(event.target.value)
 
@@ -18,6 +18,7 @@ const CreateTripPage = () => {
         tripName={tripName}
         handleChange={handleChange}
         onSubmit={onSubmit}
+        setTrip={setTrip}
       />
     </Flex>
   )
