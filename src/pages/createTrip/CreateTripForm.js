@@ -61,7 +61,6 @@ const CreateTripForm = ({ setTrip }) => {
         label="Description"
         name="description"
         refName={register}
-        error={errors.description && errors.description.message}
       />
 
       <MemberInputs
@@ -69,7 +68,6 @@ const CreateTripForm = ({ setTrip }) => {
         memberCount={memberCount}
         setMemberCount={setMemberCount}
         removeMember={removeMember}
-        errors={errors}
       />
       <Button type="submit" mt="2rem">
         Create Trip

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stack, Text, Input, IconButton } from '@chakra-ui/core'
+import { Stack, Text } from '@chakra-ui/core'
 import AddMemberButton from './AddMemberButton'
 import MemberInput from './MemberInput'
 
@@ -7,7 +7,6 @@ const MemberInputs = ({
   memberCount,
   setMemberCount,
   register,
-  errors,
   removeMember,
 }) => {
   return (
@@ -20,11 +19,7 @@ const MemberInputs = ({
           <MemberInput
             index={i}
             removeMember={removeMember}
-            refName={register({ required: 'Enter a member name' })}
-            isInvalid={
-              errors[`member-${i}`] && errors[`member-${i}`].message
-            }
-            onChange={() => console.log(errors)}
+            refName={register}
           />
         ))}
       </Stack>
