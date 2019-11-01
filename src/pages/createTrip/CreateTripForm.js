@@ -59,7 +59,7 @@ const CreateTripForm = ({ setTrip }) => {
       <Input
         label="Description"
         name="description"
-        refName={register({ required: 'Enter a trip description' })}
+        refName={register}
         error={errors.description && errors.description.message}
       />
 
