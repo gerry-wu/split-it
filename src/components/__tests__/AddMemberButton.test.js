@@ -2,7 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 
 import { render } from 'test-utils'
-import AddMemberButton from './AddMemberButton'
+import AddMemberButton from '../AddMemberButton'
 
 describe('<AddMemberButton />', () => {
   it('renders the correct singular string when plural prop is false', () => {
