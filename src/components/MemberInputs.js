@@ -20,12 +20,14 @@ const MemberInputs = ({
             index={i}
             removeMember={removeMember}
             refName={register}
+            aria-label="Enter a trip member name"
           />
         ))}
       </Stack>
       <AddMemberButton
         plural={memberCount > 0}
         onClick={() => setMemberCount(memberCount + 1)}
+        aria-label="Remove member"
       />
     </>
   )
