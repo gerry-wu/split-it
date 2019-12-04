@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
-import CreateTripPage from './pages/createTrip'
-import TripPage from './pages/trip'
 import { ThemeProvider, CSSReset } from '@chakra-ui/core'
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import UserProvider from './providers/UserProvider'
+import AppRoutes from './pages/routes'
 
 function App() {
   const [trip, setTrip] = useState({
@@ -16,25 +12,18 @@ function App() {
     members: ['Mitch', 'Gerry', 'Felipe', 'Disha'],
   })
 
+  console.log('hello')
+
   return (
     <ThemeProvider>
       <CSSReset />
-      <Router>
-        <Switch>
-          <Route
-            path="/trip"
-            render={routeProps => (
-              <TripPage {...routeProps} trip={trip} />
-            )}
-          />
-          <Route
-            path="/"
-            render={routeProps => (
-              <CreateTripPage setTrip={setTrip} />
-            )}
-          />
-        </Switch>
-      </Router>
+      <UserProvider>
+        <Router>
+          <Switch>
+            <AppRoutes trip={trip} setTrip={setTrip} />
+          </Switch>
+        </Router>
+      </UserProvider>
     </ThemeProvider>
   )
 }
