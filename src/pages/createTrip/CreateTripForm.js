@@ -4,10 +4,12 @@ import { useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
 import MemberInputs from '../../components/MemberInputs'
 import useForm from 'react-hook-form'
+import { firestore } from '../../utils/firebase'
 
 const CreateTripForm = ({ setTrip }) => {
   const history = useHistory()
   const [memberCount, setMemberCount] = useState(1)
+  const [loading, setLoading] = useState(false)
 
   const {
     register,
@@ -18,18 +20,23 @@ const CreateTripForm = ({ setTrip }) => {
   } = useForm()
 
   // This submit method will only get called if there are no form validation errors thrown
-  const onSubmit = data => {
+  const onSubmit = async data => {
     //TODO: send to DB, get OK response
     const { members } = getValues({ nest: true })
+    const { tripName: name, description } = data
+    setLoading(true)
 
-    //then set state if successful
-    setTrip({
-      name: data.tripName,
-      description: data.description,
-      members: members,
-    })
-
-    history.push('/trip')
+    try {
+      const tripRef = await firestore.collection('trips').add({
+        name,
+        description,
+        members,
+      })
+      history.push(`/trip/${tripRef.id}`)
+    } catch (error) {
+      console.error(error)
+      setLoading(false)
+    }
   }
 
   /* getValues passing nest = true will give output an object where all form elements that use
@@ -69,7 +76,7 @@ const CreateTripForm = ({ setTrip }) => {
         setMemberCount={setMemberCount}
         removeMember={removeMember}
       />
-      <Button type="submit" mt="2rem">
+      <Button type="submit" mt="2rem" isLoading={loading}>
         Create Trip
       </Button>
     </Stack>
