@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Button } from '@chakra-ui/core'
-import { auth, signInWithGoogle } from '../../utils/firebase'
+import { signInWithGoogle } from '../../utils/firebase'
 import { UserContext } from '../../providers/UserProvider'
 import { useHistory } from 'react-router-dom'
 
