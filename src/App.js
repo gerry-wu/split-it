@@ -3,6 +3,7 @@ import { ThemeProvider, CSSReset } from '@chakra-ui/core'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import UserProvider from './providers/UserProvider'
 import AppRoutes from './pages/routes'
+import Header from './components/header'
 
 function App() {
   const [trip, setTrip] = useState({
@@ -19,6 +20,7 @@ function App() {
       <CSSReset />
       <UserProvider>
         <Router>
+          <Header />
           <Switch>
             <AppRoutes trip={trip} setTrip={setTrip} />
           </Switch>
