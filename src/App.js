@@ -12,8 +12,6 @@ function App() {
     members: ['Mitch', 'Gerry', 'Felipe', 'Disha'],
   })
 
-  console.log('hello')
-
   return (
     <ThemeProvider>
       <CSSReset />

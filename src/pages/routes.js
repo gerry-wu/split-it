@@ -14,10 +14,7 @@ const AppRoutes = ({ trip, setTrip }) => {
       <Route exact path="/">
         {user ? <Redirect to="/create-trip" /> : <LoginPage />}
       </Route>
-      <Route
-        path="/create-trip"
-        render={routeProps => <CreateTripPage setTrip={setTrip} />}
-      />
+      <Route path="/create-trip" component={CreateTripPage} />
     </>
   )
 }
