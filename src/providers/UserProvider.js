@@ -14,7 +14,6 @@ export const useUserContext = () => {
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(undefined)
-  const [userLoaded, setUserLoaded] = useState(false)
 
   useEffect(() => {
     console.log('auth')
@@ -33,14 +32,9 @@ const UserProvider = ({ children }) => {
     return () => unsubscribeFromAuth()
   }, [])
 
-  useEffect(() => {
-    console.log('userloaded')
-    if (user !== undefined) setUserLoaded(true)
-  }, [user])
-
   return (
     <UserContext.Provider value={user}>
-      {userLoaded ? children : null}
+      {user !== undefined ? children : null}
     </UserContext.Provider>
   )
 }
