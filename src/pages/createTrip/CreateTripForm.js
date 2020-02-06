@@ -1,17 +1,17 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Button, Stack } from '@chakra-ui/core'
 import { useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
 import MemberInputs from '../../components/MemberInputs'
 import useForm from 'react-hook-form'
 import { firestore } from '../../utils/firebase'
-import { UserContext } from '../../providers/UserProvider'
+import { useUserContext } from '../../providers/UserProvider'
 
 const CreateTripForm = () => {
   const history = useHistory()
   const [memberCount, setMemberCount] = useState(1)
   const [loading, setLoading] = useState(false)
-  const user = useContext(UserContext)
+  const user = useUserContext()
 
   const {
     register,

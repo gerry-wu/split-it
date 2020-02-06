@@ -1,20 +1,22 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
+import PrivateRoute from '../utils/privateRoute'
 import TripPage from './trip'
 import CreateTripPage from './createTrip'
 import LandingPage from './landing'
-import { UserContext } from '../providers/UserProvider'
+import MyTripsPage from './myTrips'
+import { useUserContext } from '../providers/UserProvider'
 
-const AppRoutes = ({ trip, setTrip }) => {
-  const user = useContext(UserContext)
-
+const AppRoutes = () => {
+  const user = useUserContext()
   return (
     <>
       <Route path="/trip/:tripId" component={TripPage} />
+      <PrivateRoute path="/create-trip" component={CreateTripPage} />
+      <Route path="/myTrips" component={MyTripsPage} />
       <Route exact path="/">
-        {user ? <Redirect to="/create-trip" /> : <LandingPage />}
+        {user ? <Redirect to="/myTrips" /> : <LandingPage />}
       </Route>
-      <Route path="/create-trip" component={CreateTripPage} />
     </>
   )
 }

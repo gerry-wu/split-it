@@ -8,7 +8,7 @@ const SigninButton = () => {
   const handleClick = async () => {
     try {
       await signInWithGoogle()
-      history.push('/create-trip')
+      history.push('/myTrips')
     } catch (error) {
       console.log(error)
     }

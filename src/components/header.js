@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Box, Flex, Heading } from '@chakra-ui/core'
-import { UserContext } from '../providers/UserProvider'
+import { useUserContext } from '../providers/UserProvider'
 import SigninButton from './signinButton'
 import SignoutButton from './signoutButton'
 
 const Header = () => {
-  const user = useContext(UserContext)
+  const user = useUserContext()
   return (
     <Box as="header" bg="gray.400" p={2}>
       <Flex align="center" justify="space-between">

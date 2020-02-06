@@ -1,7 +1,16 @@
-import React, { useState, useEffect, createContext } from 'react'
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+} from 'react'
 import { createUserProfileDocument, auth } from '../utils/firebase'
 
 export const UserContext = createContext()
+
+export const useUserContext = () => {
+  return useContext(UserContext)
+}
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null)
@@ -14,8 +23,9 @@ const UserProvider = ({ children }) => {
           userRef.onSnapshot(snapshot => {
             setUser({ uid: snapshot.id, ...snapshot.data() })
           })
+        } else {
+          setUser(null)
         }
-        setUser(userAuth)
       },
     )
 
