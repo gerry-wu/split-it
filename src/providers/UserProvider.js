@@ -13,7 +13,7 @@ export const useUserContext = () => {
 }
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState(undefined)
   const [userLoaded, setUserLoaded] = useState(false)
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     console.log('userloaded')
-    if (user !== '') setUserLoaded(true)
+    if (user !== undefined) setUserLoaded(true)
   }, [user])
 
   return (
