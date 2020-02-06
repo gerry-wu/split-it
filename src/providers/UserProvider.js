@@ -20,7 +20,7 @@ const UserProvider = ({ children }) => {
     )
 
     return () => unsubscribeFromAuth()
-  }, [user])
+  }, [])
 
   return (
     <UserContext.Provider value={user}>
