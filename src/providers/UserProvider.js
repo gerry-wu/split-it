@@ -13,9 +13,11 @@ export const useUserContext = () => {
 }
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState('')
+  const [userLoaded, setUserLoaded] = useState(false)
 
   useEffect(() => {
+    console.log('auth')
     const unsubscribeFromAuth = auth.onAuthStateChanged(
       async userAuth => {
         if (userAuth) {
@@ -28,13 +30,17 @@ const UserProvider = ({ children }) => {
         }
       },
     )
-
     return () => unsubscribeFromAuth()
   }, [])
 
+  useEffect(() => {
+    console.log('userloaded')
+    if (user !== '') setUserLoaded(true)
+  }, [user])
+
   return (
     <UserContext.Provider value={user}>
-      {children}
+      {userLoaded ? children : null}
     </UserContext.Provider>
   )
 }
