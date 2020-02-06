@@ -12,9 +12,9 @@ const MemberInputs = ({
   return (
     <>
       <Text as="label" fontSize="lg">
-        Members
+        Who will be joining you?
       </Text>
-      <Stack spacing={2} mb="0.5rem">
+      <Stack spacing={2} mb="0.5rem" mt="0.4rem">
         {[...Array(memberCount)].map((e, i) => (
           <MemberInput
             index={i}
