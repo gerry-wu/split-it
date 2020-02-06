@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import TripPage from './trip'
 import CreateTripPage from './createTrip'
-import LandingPge from './landing'
+import LandingPage from './landing'
 import { UserContext } from '../providers/UserProvider'
 
 const AppRoutes = ({ trip, setTrip }) => {
@@ -12,7 +12,7 @@ const AppRoutes = ({ trip, setTrip }) => {
     <>
       <Route path="/trip/:tripId" component={TripPage} />
       <Route exact path="/">
-        {user ? <Redirect to="/create-trip" /> : <LandingPge />}
+        {user ? <Redirect to="/create-trip" /> : <LandingPage />}
       </Route>
       <Route
         path="/create-trip"
