@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <>
       <Box as="header" p={0}>
-        <Flex align="center" justify="space-between" px={20}>
+        <Flex align="center" justify="space-between" px={[3, 20]}>
           <Link to="/">
             <Image src={logo} alt="" w="150px" />
           </Link>

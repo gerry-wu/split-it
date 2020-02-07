@@ -13,7 +13,11 @@ const SignoutButton = () => {
       console.log(error)
     }
   }
-  return <Button onClick={handleClick}>Sign Out</Button>
+  return (
+    <Button variant="ghost" onClick={handleClick}>
+      Sign Out
+    </Button>
+  )
 }
 
 export default SignoutButton

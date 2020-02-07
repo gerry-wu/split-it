@@ -17,7 +17,7 @@ import { Link as RouterLink } from 'react-router-dom'
 
 const LandingPage = () => {
   return (
-    <Stack align="center" spacing={10} p={[20, 8]}>
+    <Stack align="center" spacing={[5, 16]} p={[8, 10]}>
       <Stack>
         <Heading as="h2" size="xl">
           Easy splitting of group expenses
@@ -31,8 +31,8 @@ const LandingPage = () => {
           w="10%"
           maxW="350px"
           minW="200px"
-          my={[0, 10, 0]}
-          mr={[20, 0, 20]}
+          my={[8, 0]}
+          mr={[0, 16]}
         >
           <Image src={calculator} alt="" />
         </Box>
@@ -57,7 +57,7 @@ const LandingPage = () => {
           <Link
             as={RouterLink}
             to="/login"
-            color="blue.700"
+            color="brand"
             fontWeight="bold"
           >
             Sign in to start your journey
