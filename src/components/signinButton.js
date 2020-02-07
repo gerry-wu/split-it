@@ -1,19 +1,15 @@
 import React from 'react'
 import { Button } from '@chakra-ui/core'
-import { signInWithGoogle } from '../utils/firebase'
 import { useHistory } from 'react-router-dom'
 
 const SigninButton = () => {
   const history = useHistory()
-  const handleClick = async () => {
-    try {
-      await signInWithGoogle()
-      history.push('/myTrips')
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  return <Button onClick={handleClick}>Google Sign In</Button>
+
+  return (
+    <Button variant="ghost" onClick={() => history.push('/login')}>
+      Sign In
+    </Button>
+  )
 }
 
 export default SigninButton

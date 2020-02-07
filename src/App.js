@@ -4,10 +4,11 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import UserProvider from './providers/UserProvider'
 import AppRoutes from './pages/routes'
 import Header from './components/header'
+import customTheme from './customTheme'
 
 function App() {
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={customTheme}>
       <CSSReset />
       <UserProvider>
         <Router>
