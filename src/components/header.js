@@ -8,8 +8,8 @@ const Header = () => {
   const user = useUserContext()
   return (
     <Box as="header" bg="gray.400" p={2}>
-      <Flex align="center" justify="space-between">
-        <Heading as="h1" size="2xl" color="white">
+      <Flex align="center" justify="space-between" px={20}>
+        <Heading as="h1" size="xl" color="white">
           Split it!
         </Heading>
         <Flex>{user ? <SignoutButton /> : <SigninButton />}</Flex>

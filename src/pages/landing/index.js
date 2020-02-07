@@ -12,7 +12,7 @@ import calculator from '../../assets/calculator.png'
 
 const LandingPage = () => {
   return (
-    <Flex h={700} bg="blue.50" justify="center" align="center" p={20}>
+    <Flex h={700} bg="gray.50" justify="center" align="center" p={20}>
       <Flex w="35%" maxW="400px" m={5}>
         <Image src={calculator} alt="" />
       </Flex>
@@ -26,7 +26,7 @@ const LandingPage = () => {
         bg="rgba(255,255,255,0.7)"
       >
         <Heading as="h2" size="xl">
-          Sign in to split your trips!
+          Sign in to split the cost your trips!
         </Heading>
         <List spacing={3}>
           <ListItem>

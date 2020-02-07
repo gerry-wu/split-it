@@ -4,12 +4,23 @@ import { useUserContext } from '../providers/UserProvider'
 
 function PrivateRoute({ component: Component, ...rest }) {
   const user = useUserContext()
+  console.log('user: ', user)
   return (
     <Route
       {...rest}
-      render={props =>
-        user ? <Component {...props} /> : <Redirect to="/" />
-      }
+      render={props => {
+        console.log('props in router', props)
+        return user ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { referrer: props.location.pathname },
+            }}
+          />
+        )
+      }}
     />
   )
 }
