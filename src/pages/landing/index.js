@@ -1,50 +1,71 @@
 import React from 'react'
-import SigninButton from '../../components/signinButton'
 import {
   Heading,
   List,
   ListItem,
   ListIcon,
   Flex,
+  Box,
   Image,
+  Text,
+  Stack,
+  Link,
+  Icon,
 } from '@chakra-ui/core'
 import calculator from '../../assets/calculator.png'
+import { Link as RouterLink } from 'react-router-dom'
 
 const LandingPage = () => {
   return (
-    <Flex h={700} bg="gray.50" justify="center" align="center" p={20}>
-      <Flex w="35%" maxW="400px" m={5}>
-        <Image src={calculator} alt="" />
-      </Flex>
-      <Flex
-        h={400}
-        direction="column"
-        borderWidth="1px"
-        rounded="lg"
-        justify="space-around"
-        p={10}
-        bg="rgba(255,255,255,0.7)"
-      >
+    <Stack align="center" spacing={10} p={[20, 8]}>
+      <Stack>
         <Heading as="h2" size="xl">
-          Sign in to split the cost your trips!
+          Easy splitting of group expenses
         </Heading>
-        <List spacing={3}>
-          <ListItem>
-            <ListIcon icon="check-circle" color="green.500" />
-            Add new trips with multiple members
-          </ListItem>
-          <ListItem>
-            <ListIcon icon="check-circle" color="green.500" />
-            Document all the trip expense at one place
-          </ListItem>
-          <ListItem>
-            <ListIcon icon="check-circle" color="green.500" />
-            Settle up the expense at just one click!
-          </ListItem>
-        </List>
-        <SigninButton />
+        <Text fontSize="2xl" textAlign="center" color="gray.500">
+          You enjoy the group trips. We split the cost.
+        </Text>
+      </Stack>
+      <Flex justify="center" align="center" wrap="wrap">
+        <Box
+          w="10%"
+          maxW="350px"
+          minW="200px"
+          my={[0, 10, 0]}
+          mr={[20, 0, 20]}
+        >
+          <Image src={calculator} alt="" />
+        </Box>
+        <Stack spacing={5}>
+          <Heading as="h2" size="xl" fontWeight="normal">
+            Split the cost your trips
+          </Heading>
+          <List spacing={1} color="gray.500">
+            <ListItem>
+              <ListIcon icon="check-circle" color="green.500" />
+              Add new trips with multiple members
+            </ListItem>
+            <ListItem>
+              <ListIcon icon="check-circle" color="green.500" />
+              Document all the trip expense at one place
+            </ListItem>
+            <ListItem>
+              <ListIcon icon="check-circle" color="green.500" />
+              Settle up the expense at just one click!
+            </ListItem>
+          </List>
+          <Link
+            as={RouterLink}
+            to="/login"
+            color="blue.700"
+            fontWeight="bold"
+          >
+            Sign in to start your journey
+            <Icon name="arrow-forward" mx="2px" />
+          </Link>
+        </Stack>
       </Flex>
-    </Flex>
+    </Stack>
   )
 }
 

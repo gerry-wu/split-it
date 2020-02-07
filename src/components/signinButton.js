@@ -6,7 +6,9 @@ const SigninButton = () => {
   const history = useHistory()
 
   return (
-    <Button onClick={() => history.push('/login')}>Sign In</Button>
+    <Button variant="ghost" onClick={() => history.push('/login')}>
+      Sign In
+    </Button>
   )
 }
 
