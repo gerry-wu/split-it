@@ -1,22 +1,21 @@
 import React from 'react'
-import { Box, Flex, Heading, Divider } from '@chakra-ui/core'
+import { Box, Flex, Divider, Image } from '@chakra-ui/core'
 import { useUserContext } from '../providers/UserProvider'
 import SigninButton from './signinButton'
 import SignoutButton from './signoutButton'
+import logo from '../assets/logo.png'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   const user = useUserContext()
   return (
     <>
-      <Box as="header" p={2}>
+      <Box as="header" p={0}>
         <Flex align="center" justify="space-between" px={20}>
-          <Heading
-            size="lg"
-            color="blue.700"
-            fontFamily="Tahoma, Geneva, sans-serif"
-          >
-            Splitit
-          </Heading>
+          <Link to="/">
+            <Image src={logo} alt="" w="150px" />
+          </Link>
+
           <Flex>{user ? <SignoutButton /> : <SigninButton />}</Flex>
         </Flex>
       </Box>
