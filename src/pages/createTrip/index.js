@@ -1,25 +1,27 @@
-import React, { useState } from 'react'
-import { Flex, Heading } from '@chakra-ui/core'
+import React from 'react'
+import { Flex, Heading, Box } from '@chakra-ui/core'
 import CreateTripForm from './CreateTripForm'
 
-const CreateTripPage = ({ setTrip }) => {
-  const [tripName, setTripName] = useState('')
-  const handleChange = event => setTripName(event.target.value)
-
-  const onSubmit = () =>
-    console.log(`We have submitted the form! Tripname: ${tripName}`)
-
+const CreateTripPage = () => {
   return (
-    <Flex direction="column" margin="2rem">
-      <Heading as="h1" fontSize="60px" marginBottom="3rem">
-        Create a trip
+    <Flex direction="column" margin="2rem" w="100%">
+      <Heading
+        as="h1"
+        fontSize={['2xl', '5xl']}
+        fontWeight={['medium', 'normal']}
+        mb="3rem"
+      >
+        Tell us about your{' '}
+        <Box
+          as="span"
+          fontWeight={['semibold', 'medium']}
+          color="blue.400"
+          fontStyle="italic"
+        >
+          next adventure
+        </Box>
       </Heading>
-      <CreateTripForm
-        tripName={tripName}
-        handleChange={handleChange}
-        onSubmit={onSubmit}
-        setTrip={setTrip}
-      />
+      <CreateTripForm />
     </Flex>
   )
 }

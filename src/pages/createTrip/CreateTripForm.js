@@ -25,13 +25,12 @@ const CreateTripForm = () => {
   const onSubmit = async data => {
     //TODO: send to DB, get OK response
     const { members } = getValues({ nest: true })
-    const { tripName: name, description } = data
+    const { tripName: name } = data
     setLoading(true)
 
     try {
       const tripRef = await firestore.collection('trips').add({
         name,
-        description,
         members,
         user: {
           uid: user.uid,
@@ -62,19 +61,13 @@ const CreateTripForm = () => {
     <Stack
       as="form"
       onSubmit={handleSubmit(onSubmit)}
-      w={{ sm: '100%', lg: '20%' }}
+      w={{ sm: '90%', lg: '30%' }}
     >
       <Input
-        label="Trip"
+        label="Where are you going?"
         name="tripName"
         refName={register({ required: 'Enter a trip name' })}
         error={errors.tripName && errors.tripName.message}
-      />
-
-      <Input
-        label="Description"
-        name="description"
-        refName={register}
       />
 
       <MemberInputs
@@ -83,7 +76,13 @@ const CreateTripForm = () => {
         setMemberCount={setMemberCount}
         removeMember={removeMember}
       />
-      <Button type="submit" mt="2rem" isLoading={loading}>
+      <Button
+        type="submit"
+        mt="3rem"
+        h="3rem"
+        variantColor="blue"
+        isLoading={loading}
+      >
         Create Trip
       </Button>
     </Stack>

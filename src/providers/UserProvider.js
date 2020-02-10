@@ -13,7 +13,8 @@ export const useUserContext = () => {
 }
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(undefined)
+
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(
       async userAuth => {
@@ -27,13 +28,12 @@ const UserProvider = ({ children }) => {
         }
       },
     )
-
     return () => unsubscribeFromAuth()
   }, [])
 
   return (
     <UserContext.Provider value={user}>
-      {children}
+      {user !== undefined ? children : null}
     </UserContext.Provider>
   )
 }

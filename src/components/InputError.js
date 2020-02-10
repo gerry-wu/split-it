@@ -2,25 +2,21 @@ import React from 'react'
 import { Text, Icon, Stack } from '@chakra-ui/core'
 
 const InputError = ({ children, inputName }) => (
-  <Stack isInline>
+  <Stack isInline align="center" height="1.5rem">
     {children ? (
       <>
-        <Icon name="warning-2" color="red.600" />
+        <Icon name="warning-2" color="red.600" mr="0.25rem" />
         <Text
           id={`${inputName}-error`}
           as="span"
           fontSize="sm"
-          mb="0.5rem"
           color="red.600"
-          height="1.5rem"
           display="block"
         >
           {children}
         </Text>
       </>
-    ) : (
-      <Stack height="1.5rem"></Stack>
-    )}
+    ) : null}
   </Stack>
 )
 
