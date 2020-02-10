@@ -21,6 +21,7 @@ const MemberInputs = ({
             removeMember={removeMember}
             refName={register}
             aria-label="Enter a trip member name"
+            key={`memberInput-${i}`}
           />
         ))}
       </Stack>
