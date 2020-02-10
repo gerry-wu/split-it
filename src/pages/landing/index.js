@@ -9,11 +9,10 @@ import {
   Image,
   Text,
   Stack,
-  Link,
   Icon,
 } from '@chakra-ui/core'
 import calculator from '../../assets/calculator.png'
-import { Link as RouterLink } from 'react-router-dom'
+import RouterLink from '../../components/RouterLink'
 
 const LandingPage = () => {
   return (
@@ -54,15 +53,10 @@ const LandingPage = () => {
               Settle up the expense at just one click!
             </ListItem>
           </List>
-          <Link
-            as={RouterLink}
-            to="/login"
-            color="brand"
-            fontWeight="bold"
-          >
+          <RouterLink to="/login" color="brand" fontWeight="bold">
             Sign in to start your journey
             <Icon name="arrow-forward" mx="2px" />
-          </Link>
+          </RouterLink>
         </Stack>
       </Flex>
     </Stack>

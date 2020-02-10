@@ -4,7 +4,7 @@ import {
   Heading,
   Flex,
   Text,
-  Grid,
+  Stack,
   Alert,
   AlertIcon,
   AlertTitle,
@@ -27,7 +27,6 @@ const LoginPage = ({ location }) => {
   }
 
   if (user) {
-    console.log(user, 'redirecting')
     return (
       <Redirect
         to={location.state ? location.state.referrer : '/myTrips'}
@@ -40,11 +39,13 @@ const LoginPage = ({ location }) => {
       {location.state && (
         <Alert status="error" justifyContent="center">
           <AlertIcon />
-          <AlertTitle mr={2}>Please Login before Continue</AlertTitle>
+          <AlertTitle mr={2}>
+            Please Login before Continuing
+          </AlertTitle>
         </Alert>
       )}
       <Flex justify="center">
-        <Grid
+        <Stack
           maxW={550}
           w={['50%', '80%', '70%']}
           borderWidth="1px"
@@ -52,9 +53,7 @@ const LoginPage = ({ location }) => {
           boxShadow="md"
           p={[20, 5, 16]}
           mt={10}
-          direction="column"
-          align="stretch"
-          gap={5}
+          spacing={10}
         >
           <Heading as="h2" size="2xl" textAlign="center">
             Log In
@@ -70,7 +69,7 @@ const LoginPage = ({ location }) => {
             </Text>
           )}
           <GoogleLoginButton onClick={handleClick} />
-        </Grid>
+        </Stack>
       </Flex>
     </>
   )

@@ -4,12 +4,10 @@ import { useUserContext } from '../providers/UserProvider'
 
 function PrivateRoute({ component: Component, ...rest }) {
   const user = useUserContext()
-  console.log('user: ', user)
   return (
     <Route
       {...rest}
       render={props => {
-        console.log('props in router', props)
         return user ? (
           <Component {...props} />
         ) : (
