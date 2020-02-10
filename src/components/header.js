@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Flex, Divider, Image } from '@chakra-ui/core'
-import { useUserContext } from '../providers/UserProvider'
+import { useAuth } from '../hooks/useAuth'
 import SigninButton from './signinButton'
 import SignoutButton from './signoutButton'
 import logo from '../assets/logo.png'
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import theme from '../customTheme'
 
 const Header = () => {
-  const user = useUserContext()
+  const auth = useAuth()
   return (
     <>
       <Box
@@ -21,7 +21,9 @@ const Header = () => {
             <Image src={logo} alt="" w="150px" />
           </Link>
 
-          <Flex>{user ? <SignoutButton /> : <SigninButton />}</Flex>
+          <Flex>
+            {auth.user ? <SignoutButton /> : <SigninButton />}
+          </Flex>
         </Flex>
       </Box>
       <Divider />

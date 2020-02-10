@@ -18,6 +18,7 @@ const MemberInputs = ({
         {[...Array(memberCount)].map((e, i) => (
           <MemberInput
             index={i}
+            key={i}
             removeMember={removeMember}
             refName={register}
             aria-label="Enter a trip member name"

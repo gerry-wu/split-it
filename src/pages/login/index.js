@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { signInWithGoogle } from '../../utils/firebase'
 import {
   Heading,
   Flex,
@@ -10,27 +9,25 @@ import {
   AlertTitle,
 } from '@chakra-ui/core'
 import { Redirect } from 'react-router-dom'
-import { useUserContext } from '../../providers/UserProvider'
+import { useAuth } from '../../hooks/useAuth'
 import { GoogleLoginButton } from 'react-social-login-buttons'
 
 const LoginPage = ({ location }) => {
-  const user = useUserContext()
+  const auth = useAuth()
 
   const [isError, setError] = useState(false)
 
   const handleClick = async () => {
     try {
-      await signInWithGoogle()
+      await auth.signin()
     } catch (error) {
       setError(true)
     }
   }
 
-  if (user) {
+  if (auth.user) {
     return (
-      <Redirect
-        to={location.state ? location.state.referrer : '/myTrips'}
-      />
+      <Redirect to={location.state ? location.state.referrer : '/'} />
     )
   }
 
