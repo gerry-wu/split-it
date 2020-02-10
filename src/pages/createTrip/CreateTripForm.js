@@ -61,7 +61,7 @@ const CreateTripForm = () => {
     <Stack
       as="form"
       onSubmit={handleSubmit(onSubmit)}
-      w={{ sm: '100%', lg: '20%' }}
+      w={{ sm: '90%', lg: '30%' }}
     >
       <Input
         label="Where are you going?"
@@ -76,7 +76,13 @@ const CreateTripForm = () => {
         setMemberCount={setMemberCount}
         removeMember={removeMember}
       />
-      <Button type="submit" mt="2rem" isLoading={loading}>
+      <Button
+        type="submit"
+        mt="3rem"
+        h="3rem"
+        variantColor="blue"
+        isLoading={loading}
+      >
         Create Trip
       </Button>
     </Stack>
