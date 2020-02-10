@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Flex, Heading, Text } from '@chakra-ui/core'
+import { Flex, Heading, Text, Box } from '@chakra-ui/core'
 import { useParams } from 'react-router-dom'
 import { firestore } from '../../utils/firebase'
 
@@ -19,13 +19,20 @@ const TripPage = () => {
   }, [tripId])
 
   return (
-    <Flex direction="column" p="1rem">
-      <Heading as="h1" fontSize="xl" mb="1rem">
-        {trip.name}
+    <Flex direction="column" p="1rem" margin="0 auto">
+      <Heading
+        as="h1"
+        fontSize={['2xl', '5xl']}
+        fontWeight="normal"
+        mb="3rem"
+      >
+        Enjoy your trip to{' '}
+        <Box as="span" fontWeight="medium" color="blue.400">
+          {trip.name}
+        </Box>
+        !
       </Heading>
-      <Text mb="3rem" fontSize="md">
-        {trip.description}
-      </Text>
+
       <Heading as="h2" fontSize="lg" mb="0.5rem">
         Trip members
       </Heading>
