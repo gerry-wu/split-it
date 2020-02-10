@@ -4,14 +4,14 @@ import { useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
 import MemberInputs from '../../components/MemberInputs'
 import useForm from 'react-hook-form'
-import { firestore } from '../../utils/firebase'
-import { useUserContext } from '../../providers/UserProvider'
+import { firestore } from '../../db/auth'
+import { useAuth } from '../../hooks/useAuth'
 
 const CreateTripForm = () => {
   const history = useHistory()
   const [memberCount, setMemberCount] = useState(1)
   const [loading, setLoading] = useState(false)
-  const user = useUserContext()
+  const { user } = useAuth()
 
   const {
     register,
