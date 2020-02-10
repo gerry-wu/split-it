@@ -18,6 +18,7 @@ const Input = ({ label, name, refName, error, ...inputProps }) => (
       isInvalid={error ? true : false}
       errorBorderColor="red.300"
       aria-describedby={`${name}-error`}
+      mt="0.4rem"
       {...inputProps}
     />
     <InputError inputName={name}>{error}</InputError>
