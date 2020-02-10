@@ -1,13 +1,18 @@
 import React from 'react'
 import { Stack, Input, IconButton } from '@chakra-ui/core'
 
-const MemberInput = ({ index, removeMember, refName, ...props }) => (
+const MemberInput = ({
+  index,
+  removeMember,
+  refName,
+  ...inputProps
+}) => (
   <Stack isInline>
     <Input
       id={`members-${index}`}
       name={`members[${index}]`}
       ref={refName}
-      {...props}
+      {...inputProps}
     />
     <IconButton
       variantColor="red"
