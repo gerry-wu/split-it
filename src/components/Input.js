@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Text, Input as FormInput } from '@chakra-ui/core'
 import InputError from './InputError'
 
-const Input = ({ label, name, refName, error }) => (
+const Input = ({ label, name, refName, error, ...inputProps }) => (
   <Box mb="0.5rem">
     {label ? (
       <Text as="label" fontSize="lg" htmlFor={name}>
@@ -18,6 +18,7 @@ const Input = ({ label, name, refName, error }) => (
       isInvalid={error ? true : false}
       errorBorderColor="red.300"
       aria-describedby={`${name}-error`}
+      {...inputProps}
     />
     <InputError inputName={name}>{error}</InputError>
   </Box>
