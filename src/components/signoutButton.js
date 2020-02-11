@@ -1,11 +1,12 @@
 import React from 'react'
 import { Button } from '@chakra-ui/core'
-import { signOut } from '../utils/firebase'
+import { useAuth } from '../hooks/useAuth'
 
 const SignoutButton = () => {
+  const auth = useAuth()
   const handleClick = async () => {
     try {
-      await signOut()
+      await auth.signout()
     } catch (error) {
       console.log(error)
     }

@@ -9,13 +9,9 @@ export const signOut = () => auth.signOut()
 
 export const createUserProfileDocument = async user => {
   if (!user) return
-  // Get a reference to the place in the database where a user profile might be
-  const userRef = firestore.doc(`users/${user.uid}`)
-
-  //Go ahead and fetch the document from that location
-  const snapshot = await userRef.get()
-  if (!snapshot.exists) {
-    const { displayName, email } = user
+  if (!getUserDoc(user.uid)) {
+    const { uid, displayName, email } = user
+    const userRef = firestore.collection('users').doc(uid)
     try {
       await userRef.set({
         displayName,
@@ -25,13 +21,19 @@ export const createUserProfileDocument = async user => {
       console.error('Error creating user', error)
     }
   }
-  return getUserDocument(user.uid)
 }
 
-export const getUserDocument = async uid => {
-  if (!uid) return null
+export const getUserDoc = async uid => {
+  if (!uid) return
+  const userRef = firestore.collection('users').doc(uid)
   try {
-    return firestore.collection('users').doc(uid)
+    const doc = await userRef.get()
+    if (doc.exists) {
+      return doc.data()
+    } else {
+      console.error('No such document')
+      return undefined
+    }
   } catch (error) {
     console.error('Error fetching user', error.message)
   }
