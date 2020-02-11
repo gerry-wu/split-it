@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
 import MemberInputs from '../../components/MemberInputs'
 import useForm from 'react-hook-form'
-import { firestore } from '../../db/auth'
+import { firestore } from '../../firebase/auth'
 import { useAuth } from '../../hooks/useAuth'
 
 const CreateTripForm = () => {

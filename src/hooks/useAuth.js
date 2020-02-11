@@ -10,7 +10,7 @@ import {
   signOut,
   signInWithGoogle,
   auth,
-} from '../db/auth'
+} from '../firebase/auth'
 
 const authContext = createContext()
 
@@ -18,8 +18,8 @@ export const useAuth = () => {
   return useContext(authContext)
 }
 
-export const ProvideAuth = ({ children }) => {
-  const auth = useProvideAuth()
+export const AuthProvider = ({ children }) => {
+  const auth = useAuthProvider()
   return (
     <authContext.Provider value={auth}>
       {auth.user === null ? <Loader /> : children}
@@ -27,7 +27,7 @@ export const ProvideAuth = ({ children }) => {
   )
 }
 
-const useProvideAuth = () => {
+const useAuthProvider = () => {
   const [user, setUser] = useState(null)
 
   const signin = async () => {
