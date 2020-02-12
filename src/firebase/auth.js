@@ -1,6 +1,5 @@
 import { firebase, firestore } from './base'
 export const auth = firebase.auth()
-export const currentUser = firebase.auth().currentUser
 
 export const provider = new firebase.auth.GoogleAuthProvider()
 export const signInWithGoogle = () => auth.signInWithPopup(provider)
