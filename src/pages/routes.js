@@ -14,7 +14,6 @@ const AppRoutes = () => {
     <>
       <PrivateRoute path="/trip/:tripId" component={TripPage} />
       <PrivateRoute path="/create-trip" component={CreateTripPage} />
-      <PrivateRoute path="/myTrips" component={MyTripsPage} />
       <Route
         exact
         path="/"

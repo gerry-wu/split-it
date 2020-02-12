@@ -1,6 +1,4 @@
-export const firebase = global.firebase
-
-export const firestore = firebase.firestore()
+import { firebase, firestore } from '.'
 export const auth = firebase.auth()
 
 export const provider = new firebase.auth.GoogleAuthProvider()

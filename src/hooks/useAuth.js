@@ -19,7 +19,7 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
-  const auth = useAuthProvider()
+  const auth = useAuthContext()
   return (
     <authContext.Provider value={auth}>
       {auth.user === null ? <Loader /> : children}
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   )
 }
 
-const useAuthProvider = () => {
+const useAuthContext = () => {
   const [user, setUser] = useState(null)
 
   const signin = async () => {
