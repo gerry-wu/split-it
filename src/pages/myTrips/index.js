@@ -29,6 +29,7 @@ const MyTripsPage = () => {
       setIsLoading(true)
       try {
         const myTrips = await queryTripsByUid(uid)
+        console.log(myTrips)
         setTrips(myTrips)
       } catch (error) {
         setIsError(true)
@@ -59,13 +60,19 @@ const MyTripsPage = () => {
       ) : (
         <Stack spacing={5}>
           {trips &&
-            trips.map(({ id, name, members }) => (
-              <TripCard
-                key={id}
-                tripId={id}
-                title={name}
-                members={members}
-              />
+            (trips.length === 0 ? (
+              <Text>
+                Looks like you don't have any trips. Go create one!
+              </Text>
+            ) : (
+              trips.map(({ id, name, members }) => (
+                <TripCard
+                  key={id}
+                  tripId={id}
+                  title={name}
+                  members={members}
+                />
+              ))
             ))}
         </Stack>
       )}
