@@ -11,7 +11,7 @@ jest.mock('react-router-dom', () => {
 })
 
 describe('Login page', () => {
-  it.only('should render an alert if the location state property is present', () => {
+  it('should render an alert if the location state property is present', () => {
     const { getByText, getByRole } = render(
       <LoginPage
         location={{ state: { referrer: '/create-trip' } }}
