@@ -1,6 +1,6 @@
 import React from 'react'
-import { render, wait } from '../../utils/test-utils'
-import LoginPage from '.'
+import { render, wait } from '../../../utils/test-utils'
+import LoginPage from '../'
 import { Redirect as MockRedirect } from 'react-router-dom'
 
 //Make Redirect a jest function so we can assert it has been called
