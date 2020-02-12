@@ -21,11 +21,11 @@ const MyTripsPage = () => {
 
   const [trips, setTrips] = useState()
   const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState(true)
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     const fetchTrips = async () => {
-      setIsError(true)
+      setIsError(false)
       setIsLoading(true)
       try {
         const myTrips = await queryTripsByUid(uid)
