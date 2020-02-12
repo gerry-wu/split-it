@@ -1,4 +1,4 @@
-import { firebase, firestore } from './base'
+import { firebase, firestore } from '.'
 export const auth = firebase.auth()
 
 export const provider = new firebase.auth.GoogleAuthProvider()

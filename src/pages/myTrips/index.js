@@ -15,16 +15,17 @@ import { useAuth } from '../../hooks/useAuth'
 import Loader from '../../components/Loader'
 
 const MyTripsPage = () => {
-  const { user } = useAuth()
-  const { uid } = user
+  const {
+    user: { uid, displayName },
+  } = useAuth()
 
   const [trips, setTrips] = useState()
   const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState(false)
+  const [isError, setIsError] = useState(true)
 
   useEffect(() => {
     const fetchTrips = async () => {
-      setIsError(false)
+      setIsError(true)
       setIsLoading(true)
       try {
         const myTrips = await queryTripsByUid(uid)
@@ -41,7 +42,7 @@ const MyTripsPage = () => {
     <Box px={[3, 8]}>
       <Flex justifyContent="space-between" my={5}>
         <Text fontSize="xl" fontWeight="bold">
-          Hi, {user.displayName}
+          Hi, {displayName}
         </Text>
         <Button variantColor="teal">
           <Link to="/create-trip">Create a new trip!</Link>
@@ -58,9 +59,9 @@ const MyTripsPage = () => {
       ) : (
         <Stack spacing={5}>
           {trips &&
-            trips.map(({ id, name, members }, index) => (
+            trips.map(({ id, name, members }) => (
               <TripCard
-                key={index}
+                key={id}
                 tripId={id}
                 title={name}
                 members={members}

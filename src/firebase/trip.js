@@ -1,4 +1,4 @@
-import { firestore } from './base'
+import { firestore } from '.'
 
 const tripsRef = firestore.collection('trips')
 

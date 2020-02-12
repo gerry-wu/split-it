@@ -5,10 +5,8 @@ import { Image, Box } from '@chakra-ui/core'
 const Loader = () => {
   const [enableDisplay, setEnableDisplay] = useState(false)
   useEffect(() => {
-    console.log('call')
     const timer = setTimeout(() => {
       setEnableDisplay(true)
-      console.log(enableDisplay)
     }, 2500)
     return () => clearTimeout(timer)
   })

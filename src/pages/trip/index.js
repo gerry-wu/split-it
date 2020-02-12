@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Flex, Heading, Text, Box } from '@chakra-ui/core'
 import { useParams } from 'react-router-dom'
-import { firestore } from '../../firebase/base'
+import { firestore } from '../../firebase'
 
 const TripPage = () => {
   const [trip, setTrip] = useState('')
