@@ -44,11 +44,11 @@ const LoginPage = ({ location }) => {
       <Flex justify="center">
         <Stack
           maxW={550}
-          w={['50%', '80%', '70%']}
-          borderWidth="1px"
+          w={['100%', '80%', '70%']}
+          borderWidth={['0px', '1px']}
           rounded="lg"
-          boxShadow="md"
-          p={[20, 5, 16]}
+          boxShadow={['', 'md']}
+          p={[5, 16]}
           mt={10}
           spacing={10}
         >

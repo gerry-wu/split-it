@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
 import MemberInputs from '../../components/MemberInputs'
 import useForm from 'react-hook-form'
-import { firestore } from '../../firebase/auth'
+import { firestore } from '../../firebase/base'
 import { useAuth } from '../../hooks/useAuth'
 
 const CreateTripForm = () => {
@@ -32,11 +32,7 @@ const CreateTripForm = () => {
       const tripRef = await firestore.collection('trips').add({
         name,
         members,
-        user: {
-          uid: user.uid,
-          displayName: user.displayName,
-          email: user.email,
-        },
+        uid: user.uid,
       })
       history.push(`/trip/${tripRef.id}`)
     } catch (error) {
