@@ -9,12 +9,12 @@ const Loader = () => {
       setEnableDisplay(true)
     }, 2500)
     return () => clearTimeout(timer)
-  })
+  }, [])
   return (
     <>
       {enableDisplay && (
         <Box pt={32}>
-          <Image src={loader} m="auto" />
+          <Image src={loader} m="auto" data-testid="loader" />
         </Box>
       )}
     </>
