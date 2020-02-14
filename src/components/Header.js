@@ -17,8 +17,8 @@ const Header = () => {
         borderTop={`6px solid ${theme.colors.brand}`}
       >
         <Flex align="center" justify="space-between" px={[1, 5]}>
-          <Link to="/">
-            <Image src={logo} alt="" w="150px" />
+          <Link to="/" aria-label="Go to homepage">
+            <Image src={logo} alt="" w="150px" data-testid="logo" />
           </Link>
 
           <Flex>
