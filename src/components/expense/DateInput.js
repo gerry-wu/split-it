@@ -12,7 +12,8 @@ import DayPicker from 'react-day-picker'
 import 'react-day-picker/lib/style.css'
 import { dateToShortDate } from '../../utils/date'
 
-const DateInput = ({ selectedDay, setSelectedDay }) => {
+const DateInput = () => {
+  const [selectedDay, setSelectedDay] = useState(new Date())
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const [value, setValue] = useState(dateToShortDate(selectedDay))
   const handleClick = () => setIsCalendarOpen(!isCalendarOpen)
