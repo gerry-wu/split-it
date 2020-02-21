@@ -34,6 +34,7 @@ const ExpenseForm = ({ members }) => {
     setValue,
     watch,
     control,
+    unregister,
   } = useForm({
     defaultValues,
   })
@@ -80,6 +81,7 @@ const ExpenseForm = ({ members }) => {
           splitMethod,
           isNonEven,
           watch,
+          unregister,
           name: 'shareExpense',
         }}
       />

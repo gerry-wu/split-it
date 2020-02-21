@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {
   FormControl,
   FormLabel,
@@ -53,10 +53,12 @@ const ShareExpense = ({
   splitMethod,
   isNonEven,
   watch,
+  unregister,
 }) => {
   useEffect(() => {
-    register({ name: name })
-  }, [register, name])
+    register({ name })
+    return () => unregister(name)
+  }, [register, name, unregister])
 
   const splitWay = watch(name)
   console.log('TCL: splitWay', splitWay)
@@ -110,14 +112,6 @@ const ShareExpense = ({
       </CheckboxGroup>
     </FormControl>
   )
-
-  // return (
-  //   <ShareInput
-  //     index={1}
-  //     splitMethod="weight"
-  //     handleInput={(a, b) => console.log('hey')}
-  //   />
-  // )
 }
 
 export default ShareExpense
