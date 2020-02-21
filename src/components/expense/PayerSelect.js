@@ -1,17 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FormControl, FormLabel, Select } from '@chakra-ui/core'
+import InputError from '../InputError'
 
-const PayerSelect = ({ members }) => {
-  const [payer, setPayer] = useState()
+const PayerSelect = ({ members, name, register, error }) => {
   return (
-    <FormControl isRequired mb={5}>
-      <FormLabel htmlFor="payer">Who paid?</FormLabel>
+    <FormControl mb={5}>
+      <FormLabel htmlFor={name}>Who paid?</FormLabel>
       <Select
-        id="payer"
-        name="payer"
+        id={name}
+        name={name}
         placeholder="Select the payer"
-        onChange={e => setPayer(e.target.value)}
-        value={payer}
+        ref={register({ required: 'Please select a payer' })}
       >
         {members.length !== 0 &&
           members.map((member, index) => (
@@ -20,6 +19,9 @@ const PayerSelect = ({ members }) => {
             </option>
           ))}
       </Select>
+      {error && (
+        <InputError inputName={name}>{error.message}</InputError>
+      )}
     </FormControl>
   )
 }

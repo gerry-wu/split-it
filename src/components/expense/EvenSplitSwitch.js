@@ -1,20 +1,18 @@
 import React from 'react'
+import { Controller } from 'react-hook-form'
 import { FormControl, FormLabel, Switch } from '@chakra-ui/core'
 
-const EvenSplitSwitch = ({ isNonEven, setIsNonEven }) => {
-  const handleSwitch = () => setIsNonEven(!isNonEven)
-  return (
-    <FormControl mb={5}>
-      <FormLabel htmlFor="even-split">Non-even split?</FormLabel>
-      <Switch
-        id="even-split"
-        name="isEvenSplit"
-        value={isNonEven}
-        isChecked={isNonEven}
-        onChange={handleSwitch}
-      />
-    </FormControl>
-  )
-}
+const EvenSplitSwitch = ({ name, control }) => (
+  <Controller
+    name={name}
+    as={
+      <FormControl mb={5}>
+        <FormLabel htmlFor={name}>Non-even split?</FormLabel>
+        <Switch id={name} />
+      </FormControl>
+    }
+    control={control}
+  />
+)
 
 export default EvenSplitSwitch
