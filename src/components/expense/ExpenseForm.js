@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Stack, Button } from '@chakra-ui/core'
 import { useAuth } from '../../hooks/useAuth'
@@ -34,16 +34,12 @@ const ExpenseForm = ({ members }) => {
     setValue,
     watch,
     control,
-    unregister,
+    clearError,
   } = useForm({
     defaultValues,
   })
 
   console.log('errors, ', errors)
-
-  useEffect(() => {
-    register({ name: 'splitMethod' })
-  }, [register])
 
   const onSubmit = data => console.log(data)
 
@@ -59,7 +55,6 @@ const ExpenseForm = ({ members }) => {
           register,
           label: 'Description',
           name: 'desc',
-          errors: errors.desc,
         }}
       />
       <MoneyInput
@@ -79,8 +74,7 @@ const ExpenseForm = ({ members }) => {
           setValue,
           isNonEven,
           watch,
-          unregister,
-          control,
+          clearError,
           name: 'shareExpense',
           error: errors.shareExpense,
         }}

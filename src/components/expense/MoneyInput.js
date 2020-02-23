@@ -1,41 +1,23 @@
 import React from 'react'
-import {
-  FormControl,
-  FormLabel,
-  InputGroup,
-  Input,
-  InputLeftElement,
-} from '@chakra-ui/core'
-import InputError from '../InputError'
+import { FormControl, FormLabel } from '@chakra-ui/core'
+import InputGroup from '../InputGroup'
 
-const MoneyInput = ({ name, register, error }) => {
-  return (
-    <FormControl mb={3}>
-      <FormLabel htmlFor={name}>Amount</FormLabel>
-      <InputGroup>
-        <InputLeftElement
-          color="gray.300"
-          fontSize="1.2em"
-          children="$"
-        />
-        <Input
-          placeholder="0.00"
-          id={name}
-          name={name}
-          ref={register({
-            required: 'Please enter the amount',
-            pattern: {
-              value: /^[0-9]+(\.[0-9]{1,2})?$/i,
-              message: 'Please enter a valid amount',
-            },
-          })}
-        />
-      </InputGroup>
-      {error && (
-        <InputError inputName={name}>{error.message}</InputError>
-      )}
-    </FormControl>
-  )
-}
-
+const MoneyInput = ({ name, register, error }) => (
+  <FormControl my={3}>
+    <FormLabel htmlFor={name}>Amount</FormLabel>
+    <InputGroup
+      leftchildren={'$'}
+      placeholder="0.00"
+      name={name}
+      register={register({
+        required: 'Please enter the amount',
+        pattern: {
+          value: /^[0-9]+(\.[0-9]{1,2})?$/i,
+          message: 'Please enter a valid amount',
+        },
+      })}
+      error={error}
+    />
+  </FormControl>
+)
 export default MoneyInput

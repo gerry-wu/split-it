@@ -11,6 +11,9 @@ const PayerSelect = ({ members, name, register, error }) => {
         name={name}
         placeholder="Select the payer"
         ref={register({ required: 'Please select a payer' })}
+        isInvalid={error ? true : false}
+        errorBorderColor="red.300"
+        aria-describedby={`${name}-error`}
       >
         {members.length !== 0 &&
           members.map((member, index) => (

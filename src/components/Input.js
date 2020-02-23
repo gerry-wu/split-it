@@ -6,20 +6,13 @@ import {
 } from '@chakra-ui/core'
 import InputError from './InputError'
 
-const Input = ({
-  label,
-  name,
-  register,
-  validation,
-  error,
-  ...inputProps
-}) => (
-  <FormControl mb={3}>
+const Input = ({ label, name, register, error, ...inputProps }) => (
+  <FormControl>
     {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
     <FormInput
       id={name}
       name={name}
-      ref={register || register(validation)}
+      ref={register}
       isInvalid={error ? true : false}
       errorBorderColor="red.300"
       aria-describedby={`${name}-error`}

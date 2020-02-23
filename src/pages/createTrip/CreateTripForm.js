@@ -62,8 +62,8 @@ const CreateTripForm = () => {
       <Input
         label="Where are you going?"
         name="tripName"
-        refName={register({ required: 'Enter a trip name' })}
-        error={errors.tripName && errors.tripName.message}
+        register={register({ required: 'Enter a trip name' })}
+        error={errors.tripName}
       />
 
       <MemberInputs

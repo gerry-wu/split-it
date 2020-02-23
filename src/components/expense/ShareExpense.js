@@ -1,60 +1,15 @@
 import React, { useEffect } from 'react'
-import { Controller } from 'react-hook-form'
 import {
   FormControl,
   FormLabel,
-  Checkbox,
   CheckboxGroup,
-  Input,
   Box,
   Stack,
-  InputGroup,
-  InputLeftElement,
 } from '@chakra-ui/core'
 import InputError from '../InputError'
-
-const WeightInput = ({ name, control }) => {
-  return (
-    <Controller
-      as={<Input variant="flushed" placeholder="Weight/Share" />}
-      name={name}
-      control={control}
-      rules={{
-        required: 'Please enter the portion',
-        pattern: {
-          value: /^[0-9]+$/i,
-          message: 'Please enter a valid amount',
-        },
-      }}
-    />
-  )
-}
-
-const OtherInput = ({ name, control, children }) => {
-  return (
-    <Controller
-      as={
-        <InputGroup w="70%">
-          <InputLeftElement
-            color="gray.300"
-            fontSize="1.2em"
-            children={children}
-          />
-          <Input variant="flushed" />{' '}
-        </InputGroup>
-      }
-      name={name}
-      control={control}
-      rules={{
-        required: 'Please enter the portion',
-        pattern: {
-          value: /^[0-9]+(\.[0-9]{1,2})?$/i,
-          message: 'Please enter a valid amount',
-        },
-      }}
-    />
-  )
-}
+import Input from '../Input'
+import InputGroup from '../InputGroup'
+import Checkbox from '../Checkbox'
 
 const ShareExpense = ({
   members,
@@ -63,9 +18,8 @@ const ShareExpense = ({
   register,
   isNonEven,
   watch,
-  unregister,
   error,
-  control,
+  clearError,
 }) => {
   useEffect(() => {
     register(
@@ -73,23 +27,24 @@ const ShareExpense = ({
       {
         validate: {
           atLeastOneChecked: values =>
-            values.find(value => value.isChecked) ||
+            values.some(value => value.isChecked) ||
             'Please check at least one memeber',
         },
       },
     )
-    return () => unregister(name)
-  }, [register, name, unregister])
+  }, [register, name])
 
   const splitWay = watch(name)
   const splitMethod = watch('splitMethod')
   console.log('TCL: splitWay', splitWay)
 
   const handleCheck = index => e => {
-    const updatedCheck = splitWay.slice(0)
+    const updatedCheck = [...splitWay]
     updatedCheck[index].isChecked = e.target.checked
     setValue(name, updatedCheck)
+    if (error) clearError(name)
   }
+
   return (
     <FormControl mb={5}>
       <FormLabel>Who shares this expense?</FormLabel>
@@ -104,30 +59,71 @@ const ShareExpense = ({
             >
               <Box minW={splitMethod && ['140px', '180px']}>
                 <Checkbox
-                  isChecked={splitWay[index].isChecked}
-                  onChange={handleCheck(index)}
+                  name={`${name}[${index}].isChecked`}
+                  register={register}
+                  handleCheck={handleCheck(index)}
                 >
                   {member}
                 </Checkbox>
               </Box>
               {isNonEven && splitWay[index].isChecked && (
                 <Box>
-                  {splitMethod === 'weight' ? (
-                    <WeightInput
-                      name={`${name}[${index}].portion`}
-                      control={control}
-                    />
-                  ) : (
-                    <OtherInput
-                      name={`${name}[${index}].portion`}
-                      control={control}
-                      children={splitMethod === 'amount' ? '$' : '%'}
+                  {splitMethod === 'weight' && (
+                    <Input
+                      variant="flushed"
+                      placeholder="Weight/Share"
+                      register={register({
+                        required: `Please enter the ${splitMethod}`,
+                        pattern: {
+                          value: /^[0-9]+$/i,
+                          message: 'Please enter a valid number',
+                        },
+                      })}
+                      name={`${name}[${index}].${splitMethod}`}
+                      error={
+                        error && error[index]
+                          ? error[index][splitMethod]
+                          : undefined
+                      }
                     />
                   )}
-                  {error && error[index] && error[index].portion && (
-                    <InputError inputName={name}>
-                      {error[index].portion.message}
-                    </InputError>
+                  {splitMethod === 'amount' && (
+                    <InputGroup
+                      name={`${name}[${index}].${splitMethod}`}
+                      leftChildren={'$'}
+                      variant="flushed"
+                      register={register({
+                        required: `Please enter the ${splitMethod}`,
+                        pattern: {
+                          value: /^[0-9]+(\.[0-9]{1,2})?$/i,
+                          message: `Please enter a valid ${splitMethod}`,
+                        },
+                      })}
+                      error={
+                        error && error[index]
+                          ? error[index][splitMethod]
+                          : undefined
+                      }
+                    />
+                  )}
+                  {splitMethod === 'percentage' && (
+                    <InputGroup
+                      name={`${name}[${index}].${splitMethod}`}
+                      leftChildren={'%'}
+                      variant="flushed"
+                      register={register({
+                        required: `Please enter the ${splitMethod}`,
+                        pattern: {
+                          value: /^[0-9]+(\.[0-9]{1,2})?$/i,
+                          message: `Please enter a valid ${splitMethod}`,
+                        },
+                      })}
+                      error={
+                        error && error[index]
+                          ? error[index][splitMethod]
+                          : undefined
+                      }
+                    />
                   )}
                 </Box>
               )}
