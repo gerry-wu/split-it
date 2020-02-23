@@ -15,7 +15,6 @@ const SplitOptions = ({ name, control }) => {
       <Controller
         name={name}
         control={control}
-        // defaultValue="weight"
         as={
           <RadioGroup isInline spacing={4} id={name}>
             <Radio value="weight">Weight/Share</Radio>

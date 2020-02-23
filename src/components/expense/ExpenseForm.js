@@ -15,6 +15,7 @@ const ExpenseForm = ({ members }) => {
   const {
     user: { displayName },
   } = useAuth()
+
   members = [displayName, ...members]
 
   const defaultValues = {
@@ -24,7 +25,6 @@ const ExpenseForm = ({ members }) => {
     shareExpense: members.map(member => ({
       member,
       isChecked: true,
-      portion: null,
     })),
   }
   const {
@@ -48,7 +48,6 @@ const ExpenseForm = ({ members }) => {
   const onSubmit = data => console.log(data)
 
   const isNonEven = watch('isNonEven')
-  const splitMethod = watch('splitMethod')
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -78,11 +77,12 @@ const ExpenseForm = ({ members }) => {
           members,
           register,
           setValue,
-          splitMethod,
           isNonEven,
           watch,
           unregister,
+          control,
           name: 'shareExpense',
+          error: errors.shareExpense,
         }}
       />
       <Stack py={5} spacing={5} isInline={[false, true]}>

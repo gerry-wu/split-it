@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Controller } from 'react-hook-form'
 import {
   FormControl,
   FormLabel,
@@ -10,38 +11,48 @@ import {
   InputGroup,
   InputLeftElement,
 } from '@chakra-ui/core'
+import InputError from '../InputError'
 
-const ShareInput = ({ index, splitMethod, handleInput, value }) => {
-  const handleChange = i => e => {
-    console.log('handleChange internal call')
-    handleInput(i, e.target.value)
-  }
-
-  console.log('render shareinput')
-  if (splitMethod === 'weight') {
-    return (
-      <Input
-        variant="flushed"
-        placeholder="Weight/Share"
-        onChange={handleChange(index)}
-        value={value || ''}
-      />
-    )
-  }
-  const children = splitMethod === 'amount' ? '$' : '%'
+const WeightInput = ({ name, control }) => {
   return (
-    <InputGroup w="70%">
-      <InputLeftElement
-        color="gray.300"
-        fontSize="1.2em"
-        children={children}
-      />
-      <Input
-        variant="flushed"
-        onChange={handleChange(index)}
-        value={value || ''}
-      />
-    </InputGroup>
+    <Controller
+      as={<Input variant="flushed" placeholder="Weight/Share" />}
+      name={name}
+      control={control}
+      rules={{
+        required: 'Please enter the portion',
+        pattern: {
+          value: /^[0-9]+$/i,
+          message: 'Please enter a valid amount',
+        },
+      }}
+    />
+  )
+}
+
+const OtherInput = ({ name, control, children }) => {
+  return (
+    <Controller
+      as={
+        <InputGroup w="70%">
+          <InputLeftElement
+            color="gray.300"
+            fontSize="1.2em"
+            children={children}
+          />
+          <Input variant="flushed" />{' '}
+        </InputGroup>
+      }
+      name={name}
+      control={control}
+      rules={{
+        required: 'Please enter the portion',
+        pattern: {
+          value: /^[0-9]+(\.[0-9]{1,2})?$/i,
+          message: 'Please enter a valid amount',
+        },
+      }}
+    />
   )
 }
 
@@ -50,33 +61,34 @@ const ShareExpense = ({
   name,
   setValue,
   register,
-  splitMethod,
   isNonEven,
   watch,
   unregister,
+  error,
+  control,
 }) => {
   useEffect(() => {
-    register({ name })
+    register(
+      { name },
+      {
+        validate: {
+          atLeastOneChecked: values =>
+            values.find(value => value.isChecked) ||
+            'Please check at least one memeber',
+        },
+      },
+    )
     return () => unregister(name)
   }, [register, name, unregister])
 
   const splitWay = watch(name)
+  const splitMethod = watch('splitMethod')
   console.log('TCL: splitWay', splitWay)
 
-  const handleInput = (i, value) => {
-    console.log('TCL: handleInput -> value', value)
-    const updatedCheck = splitWay.slice(0)
-    updatedCheck[i].portion = value === '' ? null : value
-    setValue(name, updatedCheck)
-  }
-
   const handleCheck = index => e => {
-    const isChecked = e.target.checked
     const updatedCheck = splitWay.slice(0)
-    updatedCheck[index].isChecked = isChecked
-    if (!isChecked) updatedCheck[index].portion = null
+    updatedCheck[index].isChecked = e.target.checked
     setValue(name, updatedCheck)
-    console.log('splitway, ', splitWay)
   }
   return (
     <FormControl mb={5}>
@@ -92,7 +104,6 @@ const ShareExpense = ({
             >
               <Box minW={splitMethod && ['140px', '180px']}>
                 <Checkbox
-                  key={`member-${index + 1}`}
                   isChecked={splitWay[index].isChecked}
                   onChange={handleCheck(index)}
                 >
@@ -100,16 +111,32 @@ const ShareExpense = ({
                 </Checkbox>
               </Box>
               {isNonEven && splitWay[index].isChecked && (
-                <ShareInput
-                  index={index}
-                  splitMethod={splitMethod}
-                  handleInput={handleInput}
-                  value={splitWay[index].portion}
-                />
+                <Box>
+                  {splitMethod === 'weight' ? (
+                    <WeightInput
+                      name={`${name}[${index}].portion`}
+                      control={control}
+                    />
+                  ) : (
+                    <OtherInput
+                      name={`${name}[${index}].portion`}
+                      control={control}
+                      children={splitMethod === 'amount' ? '$' : '%'}
+                    />
+                  )}
+                  {error && error[index] && error[index].portion && (
+                    <InputError inputName={name}>
+                      {error[index].portion.message}
+                    </InputError>
+                  )}
+                </Box>
               )}
             </Stack>
           ))}
       </CheckboxGroup>
+      {error && error.message && (
+        <InputError inputName={name}>{error.message}</InputError>
+      )}
     </FormControl>
   )
 }

@@ -22,7 +22,6 @@ const MoneyInput = ({ name, register, error }) => {
           placeholder="0.00"
           id={name}
           name={name}
-          type="number"
           ref={register({
             required: 'Please enter the amount',
             pattern: {
