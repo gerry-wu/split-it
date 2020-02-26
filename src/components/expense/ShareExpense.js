@@ -16,7 +16,7 @@ const ShareExpense = ({
   name,
   setValue,
   register,
-  isNonEven,
+  isEven,
   watch,
   error,
   clearError,
@@ -28,7 +28,7 @@ const ShareExpense = ({
         validate: {
           atLeastOneChecked: values =>
             values.some(value => value.isChecked) ||
-            'Please check at least one memeber',
+            'Please check at least one member',
         },
       },
     )
@@ -38,7 +38,7 @@ const ShareExpense = ({
   const splitMethod = watch('splitMethod')
   console.log('TCL: splitWay', splitWay)
 
-  const handleCheck = index => e => {
+  const handleClick = index => e => {
     const updatedCheck = [...splitWay]
     updatedCheck[index].isChecked = e.target.checked
     setValue(name, updatedCheck)
@@ -61,12 +61,12 @@ const ShareExpense = ({
                 <Checkbox
                   name={`${name}[${index}].isChecked`}
                   register={register}
-                  handleCheck={handleCheck(index)}
+                  handleClick={handleClick(index)}
                 >
                   {member}
                 </Checkbox>
               </Box>
-              {isNonEven && splitWay[index].isChecked && (
+              {!isEven && splitWay[index].isChecked && (
                 <Box>
                   {splitMethod === 'weight' && (
                     <Input

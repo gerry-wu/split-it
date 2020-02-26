@@ -1,9 +1,9 @@
 import React from 'react'
 import { Checkbox as FormCheckbox } from '@chakra-ui/core'
 
-const Checkbox = ({ name, register, handleCheck, children }) => {
+const Checkbox = ({ name, register, handleClick, children }) => {
   return (
-    <FormCheckbox name={name} ref={register} onChange={handleCheck}>
+    <FormCheckbox name={name} ref={register} onChange={handleClick}>
       {children}
     </FormCheckbox>
   )

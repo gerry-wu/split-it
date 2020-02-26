@@ -1,14 +1,14 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Stack, Button } from '@chakra-ui/core'
+import { Stack, Button, Flex } from '@chakra-ui/core'
 import { useAuth } from '../../hooks/useAuth'
 import DateInput from './DateInput'
 import MoneyInput from './MoneyInput'
 import ShareExpense from './ShareExpense'
 import PayerSelect from './PayerSelect'
-import EvenSliptSwitch from './EvenSplitSwitch'
 import SplitOptions from './SplitOptions'
 import Input from '../Input'
+import Switch from '../Switch'
 import { dateToShortDate } from '../../utils/date'
 
 const ExpenseForm = ({ members }) => {
@@ -20,7 +20,7 @@ const ExpenseForm = ({ members }) => {
 
   const defaultValues = {
     date: dateToShortDate(new Date()),
-    isNonEven: false,
+    isEven: true,
     splitMethod: 'weight',
     shareExpense: members.map(member => ({
       member,
@@ -41,9 +41,10 @@ const ExpenseForm = ({ members }) => {
 
   console.log('errors, ', errors)
 
+  // TODO: remove console log and implement the actual form submit
   const onSubmit = data => console.log(data)
 
-  const isNonEven = watch('isNonEven')
+  const isEven = watch('isEven')
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -63,28 +64,41 @@ const ExpenseForm = ({ members }) => {
       <PayerSelect
         {...{ members, register, name: 'payer', error: errors.payer }}
       />
-      <EvenSliptSwitch {...{ control, name: 'isNonEven' }} />
-      {isNonEven && (
-        <SplitOptions {...{ control, name: 'splitMethod' }} />
+      <Switch
+        {...{
+          register,
+          name: 'isEven',
+          label: 'Split this expense evenly?',
+        }}
+      />
+      {!isEven && (
+        <SplitOptions
+          {...{
+            control,
+            name: 'splitMethod',
+          }}
+        />
       )}
       <ShareExpense
         {...{
           members,
           register,
           setValue,
-          isNonEven,
+          isEven,
           watch,
           clearError,
           name: 'shareExpense',
           error: errors.shareExpense,
         }}
       />
-      <Stack py={5} spacing={5} isInline={[false, true]}>
-        <Button w="100%">Save and New</Button>
-        <Button type="submit" w="100%" variantColor="blue">
+      <Flex pb={5} flexDirection={['column', 'row']}>
+        <Button w="100%" mr={[0, 5]} mb={[3, 0]}>
+          Save and New
+        </Button>
+        <Button w="100%" variantColor="blue" type="submit">
           Save and Close
         </Button>
-      </Stack>
+      </Flex>
     </form>
   )
 }
