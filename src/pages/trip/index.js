@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Flex, Heading, Text, Box } from '@chakra-ui/core'
 import { useParams } from 'react-router-dom'
 import { firestore } from '../../firebase'
+import ExpenseModal from '../../components/expense/ExpenseModal'
 
 const TripPage = () => {
   const [trip, setTrip] = useState('')
@@ -37,9 +38,13 @@ const TripPage = () => {
         Trip members
       </Heading>
       {trip &&
-        trip.members.map(member => (
-          <Text fontSize="md">{member}</Text>
+        trip.members.map((member, index) => (
+          <Text fontSize="md" key={index}>
+            {member}
+          </Text>
         ))}
+
+      <ExpenseModal members={trip.members} />
     </Flex>
   )
 }

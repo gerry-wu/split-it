@@ -13,6 +13,7 @@ import TripCard from '../../components/TripCard'
 import { queryTripsByUid } from '../../firebase/trip'
 import { useAuth } from '../../hooks/useAuth'
 import Loader from '../../components/Loader'
+import { ISOtoLongDate } from '../../utils/date'
 
 const MyTripsPage = () => {
   const {
@@ -45,6 +46,7 @@ const MyTripsPage = () => {
         <Text fontSize="xl" fontWeight="bold">
           Hi, {displayName}
         </Text>
+        <time>{ISOtoLongDate(new Date().toISOString())}</time>
         <Button variantColor="teal">
           <Link to="/create-trip">Create a new trip!</Link>
         </Button>

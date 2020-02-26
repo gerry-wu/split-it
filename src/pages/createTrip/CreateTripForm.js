@@ -3,7 +3,7 @@ import { Button, Stack } from '@chakra-ui/core'
 import { useHistory } from 'react-router-dom'
 import Input from '../../components/Input'
 import MemberInputs from '../../components/MemberInputs'
-import useForm from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { firestore } from '../../firebase'
 import { useAuth } from '../../hooks/useAuth'
 
@@ -62,8 +62,8 @@ const CreateTripForm = () => {
       <Input
         label="Where are you going?"
         name="tripName"
-        refName={register({ required: 'Enter a trip name' })}
-        error={errors.tripName && errors.tripName.message}
+        register={register({ required: 'Enter a trip name' })}
+        error={errors.tripName}
       />
 
       <MemberInputs

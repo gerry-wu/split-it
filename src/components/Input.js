@@ -1,28 +1,27 @@
 import React from 'react'
-import { Box, Text, Input as FormInput } from '@chakra-ui/core'
+import {
+  FormControl,
+  FormLabel,
+  Input as FormInput,
+} from '@chakra-ui/core'
 import InputError from './InputError'
 
-const Input = ({ label, name, refName, error, ...inputProps }) => (
-  <Box mb="0.5rem">
-    {label ? (
-      <Text as="label" fontSize="lg" htmlFor={name}>
-        {label}
-      </Text>
-    ) : null}
+const Input = ({ label, name, register, error, ...inputProps }) => (
+  <FormControl>
+    {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
     <FormInput
       id={name}
       name={name}
-      ref={refName}
-      size="md"
-      width="100%"
+      ref={register}
       isInvalid={error ? true : false}
       errorBorderColor="red.300"
       aria-describedby={`${name}-error`}
-      mt="0.4rem"
       {...inputProps}
     />
-    <InputError inputName={name}>{error}</InputError>
-  </Box>
+    {error && (
+      <InputError inputName={name}>{error.message}</InputError>
+    )}
+  </FormControl>
 )
 
 export default Input
